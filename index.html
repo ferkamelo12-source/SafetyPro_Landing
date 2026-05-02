@@ -16,9 +16,9 @@
         .text-glow { text-shadow: 0 0 20px rgba(251, 192, 45, 0.3); }
         .card-hover:hover { transform: translateY(-5px); border-color: rgba(251, 192, 45, 0.4); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5); }
         .modal-active { overflow: hidden; }
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; z-index: 100; transition: all 0.3s ease; }
-        .brand-logo { height: 45px; width: auto; object-fit: contain; }
-        .video-wrapper { aspect-ratio: 16 / 9; width: 100%; border-radius: 3rem; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.1); position: relative; }
+        .brand-logo { height: 38px; width: auto; object-fit: contain; }
+        @media (min-width: 640px) { .brand-logo { height: 45px; } }
+        .video-wrapper { aspect-ratio: 16 / 9; width: 100%; border-radius: 2rem; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.1); position: relative; }
     </style>
 </head>
 <body class="text-slate-300 selection:bg-yellow-500/30 text-left">
@@ -33,10 +33,7 @@
             phoneDisplay: "314-390-8752",
             email: "contacto@safetypromaster.com",
             whatsappMsg: "Hola Fernando, necesito agendar una auditoría para mi empresa.",
-            
-            // 🎥 VIDEO DEMO: Pega aquí el link de tu video (YouTube o MP4 directo)
             videoDemoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
-
             social: {
                 facebook: "https://facebook.com/safetypromaster",
                 instagram: "https://instagram.com/safetypromaster",
@@ -78,79 +75,71 @@
             ],
             legalModals: {
                 privacy: {
-                    title: "Política de Privacidad y Datos",
+                    title: "Política de Privacidad",
                     content: "En SafetyPro Master LLC, valoramos su privacidad. Los datos recolectados son utilizados exclusivamente para coordinar servicios de consultoría conforme a las leyes de Missouri."
                 },
                 osha: {
-                    title: "Estándares y Normativa OSHA",
-                    content: "Nuestros servicios se rigen estrictamente bajo los códigos federales 29 CFR 1926 y 29 CFR 1910. Proporcionamos el blindaje técnico necesario para superar inspecciones sorpresa."
+                    title: "Estándares OSHA",
+                    content: "Nuestros servicios se rigen bajo los códigos federales 29 CFR 1926 y 1910. Proporcionamos el blindaje técnico necesario para superar inspecciones sorpresa."
                 }
             }
         };
     </script>
 
-    <!-- Botón Flotante de WhatsApp -->
-    <a id="wa-float" href="#" target="_blank" class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform border-4 border-white/10 flex items-center justify-center">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
-
-    <!-- Navegación -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-3xl px-6 py-3 border-white/10 text-left">
-            <div class="flex items-center gap-3 cursor-pointer text-left" onclick="window.scrollTo(0,0)">
-                <img src="https://i.ibb.co/ynP5Pk89/Isotipo-solo-Adobe.png" alt="SafetyPro Master" class="brand-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <i data-lucide="shield-check" class="text-yellow-500 w-10 h-10" style="display:none;"></i>
-                <div class="leading-none border-l border-white/10 pl-3 hidden sm:block text-left text-white">
-                    <span class="font-display font-black text-xl tracking-tighter uppercase italic">SafetyPro</span><br/>
-                    <span class="text-yellow-500 font-display font-black text-xl tracking-tighter uppercase leading-none">Master</span>
+    <!-- Navegación Refinada -->
+    <nav class="fixed top-0 w-full z-50 px-3 py-2 md:px-6 md:py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl md:rounded-3xl px-4 py-2 md:px-6 md:py-3 border-white/10">
+            <div class="flex items-center gap-2 md:gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="https://i.ibb.co/ynP5Pk89/Isotipo-solo-Adobe.png" alt="SafetyPro Master" class="brand-logo">
+                <div class="leading-none border-l border-white/10 pl-2 md:pl-3">
+                    <span class="font-display font-black text-sm md:text-xl tracking-tighter text-white uppercase italic">SafetyPro</span><br/>
+                    <span class="text-yellow-500 font-display font-black text-sm md:text-xl tracking-tighter uppercase leading-none">Master</span>
                 </div>
             </div>
-            <div class="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            
+            <div class="hidden lg:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 <a href="#soluciones" class="hover:text-yellow-500 transition-colors">Soluciones</a>
                 <a href="#boveda" class="hover:text-yellow-500 transition-colors">Bóveda 24/7</a>
                 <a href="#contacto" class="hover:text-yellow-500 transition-colors">Contacto</a>
             </div>
-            <div class="flex items-center gap-4">
-                <a id="header-cta" href="#" target="_blank" class="safety-gradient text-slate-950 px-5 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-lg hover:scale-105 transition-all flex items-center gap-2">
-                    <i class="fab fa-whatsapp text-sm"></i> Agendar Auditoría
+
+            <div class="flex items-center">
+                <a id="header-cta" href="#" target="_blank" class="safety-gradient text-slate-950 px-3 py-2 md:px-5 md:py-2.5 rounded-xl md:rounded-2xl font-black text-[9px] md:text-[10px] uppercase tracking-widest shadow-lg hover:scale-105 transition-all flex items-center gap-1.5">
+                    <i class="fab fa-whatsapp text-[10px] md:text-sm"></i> <span>Agendar</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative pt-48 pb-32 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 text-left text-white">
-            <div class="text-left space-y-8 animate-in fade-in slide-in-from-left-8 duration-700">
-                <div class="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-500 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] border border-yellow-500/20">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
-                    </span>
+    <!-- Hero Section (Espacios compactados para móvil) -->
+    <header class="relative pt-24 pb-12 md:pt-48 md:pb-32 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center relative z-10 text-left">
+            <div class="text-left space-y-5 md:space-y-8 animate-in fade-in slide-in-from-left-8 duration-700">
+                <div class="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-500 px-4 py-2 rounded-full text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] border border-yellow-500/20">
                     Consultoría Regional Missouri · Illinois
                 </div>
-                <h1 class="text-6xl md:text-8xl font-display font-black tracking-tighter leading-[0.85] uppercase italic text-glow">
+                <h1 class="text-5xl md:text-8xl font-display font-black tracking-tighter leading-[0.85] uppercase italic text-white text-left">
                     Blindamos su<br/>
-                    <span class="text-yellow-500 not-italic italic">Patrimonio.</span>
+                    <span class="text-yellow-500 not-italic italic text-glow text-left">Patrimonio.</span>
                 </h1>
-                <p class="text-slate-400 text-lg md:text-xl font-medium max-w-xl leading-relaxed text-left">
+                <p class="text-slate-400 text-base md:text-xl font-medium max-w-xl leading-relaxed text-left">
                     Usted construya el éxito de su empresa, yo aseguro que su equipo trabaje bajo estándares de protección profesional. Consultoría experta en OSHA.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 text-left">
-                    <button onclick="window.open(document.getElementById('wa-float').href)" class="safety-gradient text-slate-950 px-10 py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all flex items-center justify-center gap-3">
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="window.open(document.getElementById('header-cta').href)" class="safety-gradient text-slate-950 px-8 py-4 md:px-10 md:py-5 rounded-2xl md:rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all flex items-center justify-center gap-3">
                         Solicitar Auditoría <i data-lucide="chevron-right" class="w-4 h-4"></i>
                     </button>
-                    <a href="#soluciones" class="glass text-white px-10 py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] text-center hover:bg-white/5 transition-all">Ver Servicios</a>
+                    <a href="#soluciones" class="glass text-white px-8 py-4 md:px-10 md:py-5 rounded-2xl md:rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] text-center hover:bg-white/5 transition-all">Ver Servicios</a>
                 </div>
             </div>
             <div class="relative animate-in fade-in zoom-in-95 duration-1000">
-                <div class="relative z-10 rounded-[4rem] aspect-[4/5] overflow-hidden border border-white/10 shadow-2xl max-h-[600px] mx-auto lg:ml-auto">
+                <div class="relative z-10 rounded-[2.5rem] md:rounded-[4rem] aspect-[4/5] overflow-hidden border border-white/10 shadow-2xl max-h-[450px] md:max-h-[600px] mx-auto lg:ml-auto">
                     <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800" alt="Consultoría OSHA" class="w-full h-full object-cover opacity-60 mix-blend-luminosity">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                    <div class="absolute bottom-12 left-12 right-12 text-left">
-                        <div class="glass p-8 rounded-[2.5rem] border-white/10">
-                            <p class="text-yellow-500 font-black text-[10px] uppercase tracking-widest mb-2 text-left">Misión 2026</p>
-                            <h3 class="text-2xl font-display font-black text-white italic tracking-tighter uppercase leading-none text-left">Cero Accidentes.<br/>Cero Multas.</h3>
+                    <div class="absolute bottom-6 left-6 right-6 text-left md:bottom-12 md:left-12 md:right-12">
+                        <div class="glass p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-white/10">
+                            <p class="text-yellow-500 font-black text-[9px] md:text-[10px] uppercase tracking-widest mb-1 md:mb-2 text-left">Misión 2026</p>
+                            <h3 class="text-xl md:text-2xl font-display font-black text-white italic tracking-tighter uppercase leading-none text-left">Cero Accidentes.<br/>Cero Multas.</h3>
                         </div>
                     </div>
                 </div>
@@ -158,95 +147,88 @@
         </div>
     </header>
 
-    <!-- Soluciones Grid -->
-    <section id="soluciones" class="py-32 px-6">
+    <!-- Soluciones (Compactado) -->
+    <section id="soluciones" class="py-12 md:py-32 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div class="space-y-4 text-left">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-20 gap-6">
+                <div class="space-y-3 text-left">
                     <p class="text-yellow-500 text-[10px] font-black uppercase tracking-[0.5em]">Servicios de Blindaje Técnico</p>
-                    <h2 class="text-5xl md:text-6xl font-display font-black tracking-tighter uppercase italic text-white leading-none text-left">Soluciones para<br/>su Negocio</h2>
+                    <h2 class="text-4xl md:text-6xl font-display font-black tracking-tighter uppercase italic text-white leading-none text-left">Soluciones para<br/>su Negocio</h2>
                 </div>
                 <p class="text-slate-500 text-sm max-w-[300px] font-medium leading-relaxed text-left">
                     Transformamos el cumplimiento normativo en una ventaja competitiva para su empresa.
                 </p>
             </div>
-            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"></div>
         </div>
     </section>
 
-    <!-- Bóveda Digital 24/7 (ENFOQUE VIDEO) -->
-    <section id="boveda" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto glass rounded-[5rem] overflow-hidden p-12 md:p-24 relative border-yellow-500/10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div class="space-y-10 relative z-10 text-left">
-                    <div class="space-y-4 text-left">
+    <!-- Bóveda Digital 24/7 (Compactado) -->
+    <section id="boveda" class="py-12 md:py-20 px-6">
+        <div class="max-w-7xl mx-auto glass rounded-[2.5rem] md:rounded-[5rem] overflow-hidden p-6 md:p-24 relative border-yellow-500/10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
+                <div class="space-y-6 md:space-y-10 relative z-10 text-left">
+                    <div class="space-y-3 text-left">
                         <p class="text-yellow-500 text-[10px] font-black uppercase tracking-[0.5em]">Evidencia en Tiempo Real</p>
-                        <h2 class="text-5xl md:text-7xl font-display font-black tracking-tighter uppercase italic leading-[0.9] text-white text-left">Bóveda Digital<br/><span class="text-yellow-500 not-italic text-left">24/7</span></h2>
+                        <h2 class="text-4xl md:text-7xl font-display font-black tracking-tighter uppercase italic leading-[0.9] text-white text-left">Bóveda Digital<br/><span class="text-yellow-500 not-italic">24/7</span></h2>
                     </div>
-                    <p class="text-slate-400 text-lg font-medium leading-relaxed text-left text-left">
-                        Sustituimos el archivador por el smartphone. Toda su documentación legal y registros de entrenamiento disponibles en un solo link inalterable. **Vea la demostración a la derecha.**
+                    <p class="text-slate-400 text-base md:text-lg font-medium leading-relaxed text-left">
+                        Sustituimos el archivador por el smartphone. Toda su documentación legal y registros de entrenamiento disponibles en un solo link inalterable.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 text-left">
-                        <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex items-center gap-4 text-left">
-                            <div class="bg-yellow-500/20 p-3 rounded-2xl text-yellow-500"><i data-lucide="folder-search"></i></div>
-                            <h4 class="font-black text-xs uppercase tracking-wider text-white leading-none text-left uppercase italic">Orden Total<br/><span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-1 inline-block">Sin Papeles</span></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 pt-2 text-left">
+                        <div class="bg-white/5 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 flex items-center gap-4">
+                            <div class="bg-yellow-500/20 p-2.5 rounded-xl text-yellow-500"><i data-lucide="folder-search"></i></div>
+                            <h4 class="font-black text-xs uppercase tracking-wider text-white leading-none text-left italic">Orden Total<br/><span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-1 inline-block">Sin Papeles</span></h4>
                         </div>
-                        <div class="bg-white/5 p-6 rounded-3xl border border-white/5 flex items-center gap-4 text-left">
-                            <div class="bg-blue-500/20 p-3 rounded-2xl text-blue-400"><i data-lucide="shield-check"></i></div>
-                            <h4 class="font-black text-xs uppercase tracking-wider text-white leading-none text-left uppercase italic">Firma Digital<br/><span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-1 inline-block">Prueba Legal</span></h4>
+                        <div class="bg-white/5 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 flex items-center gap-4">
+                            <div class="bg-blue-500/20 p-2.5 rounded-xl text-blue-400"><i data-lucide="shield-check"></i></div>
+                            <h4 class="font-black text-xs uppercase tracking-wider text-white leading-none text-left italic">Firma Digital<br/><span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-1 inline-block">Prueba Legal</span></h4>
                         </div>
                     </div>
                 </div>
 
-                <!-- CONTENEDOR DE VIDEO PROTAGONISTA -->
                 <div class="relative z-10 animate-in fade-in duration-1000 delay-300">
                     <div class="video-wrapper shadow-[0_0_80px_rgba(251,192,45,0.1)] group">
                         <video id="demo-video" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" controls>
                             <source src="" type="video/mp4">
                         </video>
                         <div id="video-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/60 pointer-events-none group-hover:hidden transition-all">
-                             <div class="bg-yellow-500 p-8 rounded-full text-slate-900 shadow-2xl mb-4 transform scale-100 group-hover:scale-110 transition-transform">
+                             <div class="bg-yellow-500 p-6 md:p-8 rounded-full text-slate-900 shadow-2xl mb-4 transform scale-100 group-hover:scale-110 transition-transform">
                                 <i data-lucide="play" fill="currentColor" size={32}></i>
                              </div>
-                             <p class="text-[12px] font-black uppercase tracking-[0.4em] text-white">Vea su Bóveda en Acción</p>
+                             <p class="text-[10px] md:text-[12px] font-black uppercase tracking-[0.4em] text-white text-center">Vea su Bóveda en Acción</p>
                         </div>
-                    </div>
-                    <!-- Decoración debajo del video -->
-                    <div class="mt-6 flex items-center justify-center gap-4 opacity-40">
-                         <div class="h-px w-12 bg-slate-500"></div>
-                         <p class="text-[10px] font-bold uppercase tracking-widest text-white">Guía de Gestión 2025</p>
-                         <div class="h-px w-12 bg-slate-500"></div>
                     </div>
                 </div>
             </div>
-            <i data-lucide="shield" class="absolute -right-20 -bottom-20 text-white/[0.02] w-[600px] h-[600px] rotate-12 pointer-events-none"></i>
+            <i data-lucide="shield" class="absolute -right-20 -bottom-20 text-white/[0.02] w-[350px] md:w-[600px] h-[350px] md:h-[600px] rotate-12 pointer-events-none"></i>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contacto" class="pt-32 pb-12 px-6 bg-slate-950/50 border-t border-white/5 text-left">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-left">
-            <div class="md:col-span-2 space-y-6 text-left">
+    <footer id="contacto" class="pt-12 pb-10 md:pt-32 md:pb-12 px-6 bg-slate-950/50 border-t border-white/5 text-left">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-20 text-left">
+            <div class="md:col-span-2 space-y-5 md:space-y-6 text-left">
                 <div class="flex items-center gap-3 text-left">
                     <img src="https://i.ibb.co/ynP5Pk89/Isotipo-solo-Adobe.png" alt="SafetyPro Master" class="brand-logo text-left" onerror="this.style.display='none';">
-                    <div class="leading-none border-l border-white/10 pl-3 text-left">
-                        <span class="font-display font-black text-xl tracking-tighter text-white uppercase italic text-left">SafetyPro</span><br/>
+                    <div class="leading-none border-l border-white/10 pl-3 text-left text-white">
+                        <span class="font-display font-black text-xl tracking-tighter uppercase italic text-left">SafetyPro</span><br/>
                         <span class="text-yellow-500 font-display font-black text-xl tracking-tighter uppercase leading-none text-left text-white">Master</span>
                     </div>
                 </div>
-                <p class="text-slate-400 text-lg font-medium max-w-sm italic text-left">
+                <p class="text-slate-400 text-lg font-medium max-w-sm italic text-left leading-relaxed">
                     "Usted construya el éxito de su empresa, yo aseguro que su equipo trabaje bajo estándares de protección profesional."
                 </p>
-                <div class="flex gap-4 pt-4 text-left">
+                <div class="flex gap-4 pt-2 text-left">
                     <a id="link-fb" href="#" class="bg-white/5 p-4 rounded-2xl hover:bg-blue-600 hover:text-white transition-all border border-white/5 flex items-center justify-center w-12 h-12 text-white"><i class="fab fa-facebook-f text-lg"></i></a>
                     <a id="link-ig" href="#" class="bg-white/5 p-4 rounded-2xl hover:bg-gradient-to-tr hover:from-yellow-400 hover:to-purple-600 hover:text-white transition-all border border-white/5 flex items-center justify-center w-12 h-12 text-white"><i class="fab fa-instagram text-lg"></i></a>
                     <a id="link-li" href="#" class="bg-white/5 p-4 rounded-2xl hover:bg-blue-700 hover:text-white transition-all border border-white/5 flex items-center justify-center w-12 h-12 text-white"><i class="fab fa-linkedin-in text-lg"></i></a>
                 </div>
             </div>
 
-            <div class="space-y-6 text-left">
+            <div class="space-y-5 md:space-y-6 text-left">
                 <h4 class="font-black text-white uppercase text-[10px] tracking-[0.3em] text-left">Navegación</h4>
-                <ul class="space-y-4 font-bold text-sm text-slate-500 text-left">
+                <ul class="space-y-3 md:space-y-4 font-bold text-sm text-slate-500 text-left">
                     <li><a href="#soluciones" class="hover:text-yellow-500 transition-colors text-left">Soluciones</a></li>
                     <li><a href="#boveda" class="hover:text-yellow-500 transition-colors text-left">Bóveda Digital 24/7</a></li>
                     <li><a href="javascript:void(0)" onclick="openModal('privacy')" class="hover:text-yellow-500 transition-colors text-[10px] uppercase tracking-widest font-black text-left">Privacidad</a></li>
@@ -254,70 +236,60 @@
                 </ul>
             </div>
 
-            <div class="space-y-6 text-left text-white">
+            <div class="space-y-5 md:space-y-6 text-left text-white">
                 <h4 class="font-black text-white uppercase text-[10px] tracking-[0.3em] text-left">Contacto Directo</h4>
-                <div class="space-y-4 text-left">
-                    <a id="link-phone" href="#" class="block text-2xl font-black text-white tracking-tighter hover:text-yellow-500 transition-colors text-left"></a>
-                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest text-left">Missouri · Illinois · Kansas</p>
-                    <a id="link-email" href="#" class="block text-sm font-bold text-yellow-500/80 text-left"></a>
+                <div class="space-y-3 md:space-y-4 text-left">
+                    <a id="link-phone" href="#" class="block text-2xl font-black text-white tracking-tighter hover:text-yellow-500 transition-colors text-left leading-none"></a>
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest text-left leading-none">Missouri · Illinois · Kansas</p>
+                    <a id="link-email" href="#" class="block text-sm font-bold text-yellow-500/80 text-left truncate max-w-full"></a>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6 opacity-40 uppercase text-left">
-            <p class="text-[9px] font-black uppercase tracking-[0.5em] text-left text-left text-white">© 2026 SAFETYPRO MASTER LLC · ALL RIGHTS RESERVED</p>
+        <div class="max-w-7xl mx-auto pt-8 md:pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 opacity-40 uppercase text-left">
+            <p class="text-[9px] font-black uppercase tracking-[0.5em] text-left text-white">© 2026 SAFETYPRO MASTER LLC · ALL RIGHTS RESERVED</p>
         </div>
     </footer>
 
     <!-- MODAL LEGAL -->
     <div id="legalModal" class="fixed inset-0 z- hidden flex items-center justify-center p-6 text-slate-900">
         <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-md text-left" onclick="closeModal()"></div>
-        <div class="bg-white w-full max-w-2xl rounded-[3rem] p-10 md:p-14 relative z-10 shadow-2xl text-left">
+        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-14 relative z-10 shadow-2xl text-left">
             <div class="flex justify-between items-center mb-8 text-left">
-                <h3 id="modalTitle" class="text-3xl font-black uppercase tracking-tighter text-left text-slate-950 leading-none text-left"></h3>
-                <button onclick="closeModal()" class="p-3 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors text-slate-950 text-left"><i data-lucide="x" size={28}></i></button>
+                <h3 id="modalTitle" class="text-2xl md:text-3xl font-black uppercase tracking-tighter text-left text-slate-950 leading-none text-left"></h3>
+                <button onclick="closeModal()" class="p-2 md:p-3 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors text-slate-950 text-left"><i data-lucide="x" size={24}></i></button>
             </div>
-            <p id="modalContent" class="text-slate-600 leading-relaxed font-bold text-xl md:text-2xl italic text-left text-left"></p>
-            <div class="mt-12 flex justify-end text-left">
-                <button onclick="closeModal()" class="bg-slate-950 text-white px-10 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-xl text-left">Cerrar</button>
+            <p id="modalContent" class="text-slate-600 leading-relaxed font-bold text-lg md:text-2xl italic text-left text-left"></p>
+            <div class="mt-10 flex justify-end text-left">
+                <button onclick="closeModal()" class="bg-slate-950 text-white px-8 py-3 rounded-full font-black text-xs uppercase tracking-widest shadow-xl text-left">Cerrar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Inicializar Iconos
         lucide.createIcons();
-
-        // Configuración de Video dinámico
         document.getElementById('demo-video').querySelector('source').src = CONTENT.videoDemoUrl;
 
-        // Cargar Servicios Dinámicamente
         const grid = document.getElementById('services-grid');
         CONTENT.services.forEach(s => {
             grid.innerHTML += `
-                <div class="glass p-8 rounded-[3rem] card-hover transition-all group flex flex-col justify-between min-h-[420px] text-left">
+                <div class="glass p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] card-hover transition-all group flex flex-col justify-between min-h-[360px] md:min-h-[420px] text-left">
                     <div>
-                        <div class="${s.bg} ${s.color} p-5 rounded-3xl w-fit mb-8 group-hover:scale-110 transition-transform text-left text-white"><i data-lucide="${s.icon}" size={32}></i></div>
-                        <h3 class="text-2xl font-display font-black mb-4 uppercase italic tracking-tighter text-white text-left leading-tight">${s.title}</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-8 text-left text-left">${s.desc}</p>
+                        <div class="${s.bg} ${s.color} p-4 md:p-5 rounded-2xl md:rounded-3xl w-fit mb-5 md:mb-8 group-hover:scale-110 transition-transform text-left text-white"><i data-lucide="${s.icon}" size={28}></i></div>
+                        <h3 class="text-xl md:text-2xl font-display font-black mb-3 md:mb-4 uppercase italic tracking-tighter text-white text-left leading-tight">${s.title}</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 md:mb-8 text-left line-clamp-3">${s.desc}</p>
                     </div>
-                    <ul class="space-y-3 text-[10px] font-black uppercase tracking-widest text-slate-500 text-left text-left">
-                        ${s.items.map(i => `<li class="flex items-center gap-3 text-left leading-none"><i data-lucide="check" class="text-yellow-500 w-4 h-4"></i> ${i}</li>`).join('')}
+                    <ul class="space-y-2 md:space-y-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-500 text-left">
+                        ${s.items.map(i => `<li class="flex items-center gap-2 md:gap-3 text-left leading-none"><i data-lucide="check" class="text-yellow-500 w-3 h-3 md:w-4 md:h-4"></i> ${i}</li>`).join('')}
                     </ul>
                 </div>`;
         });
 
-        // Configurar Enlaces WhatsApp y Contacto
         const waUrl = `https://wa.me/${CONTENT.phone}?text=${encodeURIComponent(CONTENT.whatsappMsg)}`;
         document.getElementById('header-cta').href = waUrl;
-        document.getElementById('wa-float').href = waUrl;
-        
-        // Poblar Contacto en Footer
         document.getElementById('link-phone').innerText = CONTENT.phoneDisplay;
         document.getElementById('link-phone').href = `tel:${CONTENT.phone}`;
         document.getElementById('link-email').innerText = CONTENT.email;
         document.getElementById('link-email').href = `mailto:${CONTENT.email}`;
-        
-        // Redes Sociales
         document.getElementById('link-fb').href = CONTENT.social.facebook;
         document.getElementById('link-ig').href = CONTENT.social.instagram;
         document.getElementById('link-li').href = CONTENT.social.linkedin;
