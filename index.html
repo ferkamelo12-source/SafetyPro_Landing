@@ -1,0 +1,380 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  ShieldCheck, Lock, FileText, Users, HardHat, Zap, 
+  AlertTriangle, ChevronRight, Menu, X, 
+  CheckCircle2, Mail, Phone, Droplets, ArrowUpRight, 
+  Facebook, Instagram, Linkedin, Image as ImageIcon,
+  ArrowUp, MessageCircle
+} from 'lucide-react';
+
+// ==========================================
+// SECCIÓN EDITABLE: CONFIGURACIÓN GENERAL
+// ==========================================
+const CONTENT = {
+  brandName: "SafetyPro Master",
+  logoUrl: "Isotipo solo Adobe.jpg", 
+  heroImageUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=800",
+  
+  // CONFIGURACIÓN DE CONTACTO
+  whatsappNumber: "15551234567", 
+  whatsappMessage: "Hola SafetyPro Master, me interesa solicitar una auditoría inicial para mi empresa.",
+  exampleDriveUrl: "https://drive.google.com", 
+  
+  contact: {
+    email: "contacto@safetypromaster.com",
+    phoneDisplay: "(XXX) XXX-XXXX",
+    about: "Consultoría experta dedicada al blindaje legal y seguridad industrial para contratistas latinos en Missouri e Illinois."
+  },
+
+  // REDES SOCIALES
+  socialLinks: [
+    { name: 'Facebook', url: 'https://facebook.com/tupagina', icon: Facebook },
+    { name: 'Instagram', url: 'https://instagram.com/tuperfil', icon: Instagram },
+    { name: 'Linkedin', url: 'https://linkedin.com/company/tuempresa', icon: Linkedin }
+  ],
+  
+  hero: {
+    badge: "Consultoría Especializada en Missouri",
+    titleLine1: "Blindamos su",
+    titleHighlight: "Patrimonio",
+    subtitle: "Cumplimiento Experto OSHA",
+    description: "No somos policías, somos sus aliados. Protegemos su inversión y a su equipo con gestión documental en español y conocimiento exacto de la normativa CFR 1926.",
+    primaryBtn: "SOLICITAR AUDITORÍA",
+    secondaryBtn: "Ver Ejemplo",
+    alertBox: "RIESGO FINANCIERO",
+    alertSub: "Evite Multas OSHA"
+  },
+
+  services: {
+    title: "Sectores de Especialidad",
+    tagline: "Prevención técnica adaptada a su industria",
+    items: [
+      { id: "const", title: "Construcción", desc: "Normativas 1926 para contratistas generales y subcontratistas.", points: ["Protección Caídas", "Excavaciones", "Maquinaria"], icon: "hardhat" },
+      { id: "roof", title: "Roofing", desc: "Control estricto en el riesgo fatal más común: Caídas desde alturas.", points: ["Anclajes", "Escaleras", "Rescate"], icon: "shield" },
+      { id: "solar", title: "Paneles Solares", desc: "Manejo seguro de componentes y prevención de caídas en techos.", points: ["Riesgos en Alturas", "Carga de Paneles", "EPP Específico"], icon: "zap" },
+      { id: "clean", title: "Limpieza", desc: "Seguridad química y prevención de accidentes en entornos comerciales.", points: ["Manejo de Químicos", "Prevención Resbalones", "Ergonomía"], icon: "droplet" }
+    ],
+    trainingNote: {
+      title: "Capacitación en Campo",
+      desc: "Charlas de seguridad (Toolbox Talks) en español diseñadas para su equipo de trabajo.",
+      btn: "SOLICITAR AUDITORÍA"
+    }
+  },
+
+  vault: {
+    badge: "Gestión de Evidencia",
+    title: "LA BÓVEDA DIGITAL 24/7",
+    quote: '"Usted construye el éxito, yo aseguro su equipo"',
+    desc: "Su archivo legal en la nube, organizado por expertos. Usamos Google Drive para que su evidencia esté verificada y lista ante cualquier inspección sorpresa.",
+    features: [
+      { title: "Archivo Organizado", desc: "Toda su documentación de seguridad centralizada y accesible 24/7 para el contratista." },
+      { title: "Evidencia Verificada", desc: "Cada registro es revisado y validado bajo el sello de inspección de SafetyPro Master." }
+    ],
+    btn: "Ver Ejemplo de Reporte"
+  },
+
+  legalModals: {
+    osha: {
+      title: "Normativa OSHA CFR 1926",
+      content: "La Parte 1926 de OSHA establece los estándares de seguridad y salud para el sector de la construcción. Aseguramos el cumplimiento en protección contra caídas, excavaciones y EPP para evitar sanciones federales y proteger su negocio."
+    },
+    privacidad: {
+      title: "Política de Privacidad de Datos",
+      content: "Su información y evidencia documental se manejan bajo protocolos de confidencialidad estrictos. Utilizamos almacenamiento profesional en la nube para garantizar acceso exclusivo a sus archivos."
+    },
+    terminos: {
+      title: "Términos de Servicio",
+      content: "SafetyPro Master actúa como consultor preventivo técnico. El cumplimiento final de las normas es responsabilidad del contratista; proveemos herramientas técnicas para reducir riesgos."
+    }
+  },
+
+  cta: {
+    title: "¿Está listo para blindar su empresa?",
+    slogan: "Tecnología que salva vidas. Consultoría que protege su dinero.",
+    btn: "SOLICITAR AUDITORÍA INICIAL"
+  }
+};
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
+  const openWhatsApp = () => {
+    const url = `https://wa.me/${CONTENT.whatsappNumber}?text=${encodeURIComponent(CONTENT.whatsappMessage)}`;
+    window.open(url, '_blank');
+  };
+
+  const renderIcon = (name) => {
+    switch(name) {
+      case 'hardhat': return <HardHat size={28} />;
+      case 'shield': return <ShieldCheck size={28} />;
+      case 'zap': return <Zap size={28} />;
+      case 'droplet': return <Droplets size={28} />;
+      default: return <ShieldCheck size={28} />;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#FBC02D] selection:text-[#0F172A] relative" style={{ fontFamily: '"Noto Sans", sans-serif' }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;0,900;1,400&display=swap');`}</style>
+
+      {/* 1. NAVEGACIÓN FIJA */}
+      <nav className="fixed top-0 left-0 right-0 h-16 md:h-20 bg-[#0F172A] text-white border-b border-white/10 shadow-2xl flex items-center" style={{ zIndex: 5000 }}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full flex items-center justify-between">
+          <div className="flex items-center gap-4 cursor-pointer group" onClick={scrollToTop}>
+            <div className="h-10 md:h-14 flex items-center justify-center transition-transform group-hover:scale-105">
+               <img src={CONTENT.logoUrl} alt="Logo" className="h-full w-auto object-contain" onError={(e) => { e.target.src = 'https://via.placeholder.com/60/FBC02D/0F172A?text=SPM'; }} />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="text-base md:text-lg font-black uppercase tracking-tight">SAFETYPRO <span className="text-[#FBC02D]">MASTER</span></span>
+              <span className="text-[8px] md:text-[10px] tracking-[0.25em] text-slate-400 font-bold uppercase">Industrial Safety Expert</span>
+            </div>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-10 font-black text-[11px] uppercase tracking-[0.2em]">
+            <button onClick={scrollToTop} className="hover:text-[#FBC02D] transition-colors uppercase font-black">INICIO</button>
+            <a href="#servicios" className="hover:text-[#FBC02D] transition-colors font-black uppercase">SERVICIOS</a>
+            <a href="#boveda" className="hover:text-[#FBC02D] transition-colors font-black uppercase">LA BÓVEDA</a>
+            <button onClick={openWhatsApp} className="bg-[#FBC02D] text-[#0F172A] px-6 py-2.5 rounded-full hover:bg-yellow-500 transition-all flex items-center gap-2 font-black shadow-lg">
+              <MessageCircle size={14} /> AUDITORÍA
+            </button>
+          </div>
+
+          <div className="md:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 transition-transform active:scale-90">{isMenuOpen ? <X size={32} /> : <Menu size={32} />}</button>
+          </div>
+        </div>
+      </nav>
+
+      <div className="h-16 md:h-20"></div>
+
+      {/* BOTÓN FLOTANTE VOLVER ARRIBA */}
+      <button 
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z- p-3 bg-[#0F172A] text-white rounded-full shadow-2xl transition-all border-2 border-[#FBC02D] hover:scale-110 active:scale-95 ${showBackToTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      >
+        <ArrowUp size={20} />
+      </button>
+
+      {/* MENÚ MÓVIL */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-[#0F172A] border-t border-white/10 p-10 space-y-6 font-black uppercase fixed top-16 left-0 w-full h-screen z- text-white text-center shadow-2xl animate-in slide-in-from-top duration-500">
+          <button onClick={scrollToTop} className="block w-full py-4 tracking-[0.3em] text-2xl">INICIO</button>
+          <a href="#servicios" className="block py-4 tracking-[0.3em] text-2xl" onClick={() => setIsMenuOpen(false)}>SERVICIOS</a>
+          <a href="#boveda" className="block py-4 tracking-[0.3em] text-2xl" onClick={() => setIsMenuOpen(false)}>LA BÓVEDA</a>
+          <button onClick={openWhatsApp} className="w-full py-5 bg-[#FBC02D] text-[#0F172A] rounded-full flex justify-center items-center gap-3 shadow-2xl font-black text-2xl mt-4">
+            <MessageCircle size={28} /> WHATSAPP
+          </button>
+        </div>
+      )}
+
+      {/* CONTENIDO PRINCIPAL */}
+      <main className="relative">
+        <header className="relative bg-[#0F172A] text-white py-12 lg:py-20 border-b-[10px] border-[#FBC02D] overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12 text-center lg:text-left">
+            <div className="lg:w-3/5">
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-5 py-1.5 rounded-full text-[#FBC02D] font-black text-[10px] mb-8 uppercase tracking-[0.3em]">{CONTENT.hero.badge}</div>
+              <h1 className="text-3xl md:text-6xl font-black mb-6 leading-tight uppercase tracking-tighter text-white">
+                {CONTENT.hero.titleLine1} <span className="text-[#FBC02D]">{CONTENT.hero.titleHighlight}</span> <br /> 
+                <span className="text-xl md:text-3xl opacity-90 block mt-3 tracking-normal font-bold lowercase italic leading-none">{CONTENT.hero.subtitle}</span>
+              </h1>
+              <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-xl font-medium mx-auto lg:mx-0 leading-relaxed">{CONTENT.hero.description}</p>
+              <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center">
+                <button onClick={openWhatsApp} className="bg-[#FBC02D] text-[#0F172A] px-8 py-3 rounded-full font-black text-lg hover:scale-105 transition-transform shadow-lg uppercase flex items-center justify-center gap-3 w-full sm:w-auto">
+                  {CONTENT.hero.primaryBtn} <MessageCircle size={22} />
+                </button>
+                <a href="#boveda" className="border-2 border-white/30 px-8 py-3 rounded-full font-black text-lg hover:bg-white/10 transition-all uppercase text-center w-full sm:w-auto">
+                  {CONTENT.hero.secondaryBtn}
+                </a>
+              </div>
+            </div>
+            <div className="lg:w-2/5 flex justify-center relative">
+              <div className="bg-[#FBC02D] p-3 rounded-[3rem] shadow-2xl rotate-2 w-full max-w-sm aspect-square overflow-hidden border-[6px] border-[#0F172A]">
+                <img src={CONTENT.heroImageUrl} alt="Seguridad" className="w-full h-full object-cover rounded-[2rem] transition-all duration-1000 grayscale group-hover:grayscale-0 shadow-inner" />
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-[#D32F2F] p-5 rounded-[2rem] shadow-2xl border-4 border-white/20 animate-bounce text-center">
+                <p className="text-white font-black text-lg uppercase leading-tight tracking-tight">{CONTENT.hero.alertBox}</p>
+                <p className="text-white/80 text-[10px] uppercase font-black tracking-widest mt-1">{CONTENT.hero.alertSub}</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section id="servicios" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl md:text-4xl font-black uppercase mb-4 tracking-tighter text-[#0F172A]">{CONTENT.services.title}</h2>
+            <div className="w-24 h-2 bg-[#FBC02D] mx-auto mb-6 rounded-full"></div>
+            <p className="text-slate-500 font-bold uppercase tracking-[0.4em] text-xs">{CONTENT.services.tagline}</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CONTENT.services.items.map((service) => (
+              <div key={service.id} className="bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-[#FBC02D] transition-all hover:shadow-2xl flex flex-col items-center text-center">
+                <div className="bg-[#0F172A] text-white p-4 rounded-3xl w-fit mb-6 group-hover:bg-[#FBC02D] group-hover:text-[#0F172A] transition-all group-hover:scale-110 shadow-xl">{renderIcon(service.icon)}</div>
+                <h3 className="text-xl font-black mb-3 uppercase tracking-tight text-[#0F172A] leading-tight">{service.title}</h3>
+                <p className="text-slate-600 text-sm md:text-base mb-6 leading-relaxed font-medium flex-grow">{service.desc}</p>
+                <ul className="space-y-3 text-[10px] font-black text-slate-700 uppercase tracking-widest w-full">
+                  {service.points.map((p, i) => ( <li key={i} className="flex items-center gap-2 justify-center bg-slate-50 py-2 rounded-full border border-slate-100 transition-colors group-hover:bg-yellow-50 group-hover:border-yellow-200"><CheckCircle2 size={16} className="text-[#FBC02D]" /> {p}</li> ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 bg-[#0F172A] text-white p-8 rounded-[3rem] flex flex-col lg:flex-row items-center justify-between gap-10 border-l-[12px] border-[#FBC02D] shadow-2xl text-center lg:text-left relative overflow-hidden group">
+            <div className="flex flex-col lg:flex-row items-center gap-8 z-10">
+              <div className="bg-white/10 p-5 rounded-full"><Users className="text-[#FBC02D]" size={56} /></div>
+              <div>
+                <h4 className="font-black uppercase text-2xl mb-1 text-[#FBC02D] tracking-tight">{CONTENT.services.trainingNote.title}</h4>
+                <p className="text-slate-300 font-medium text-base md:text-lg max-w-xl leading-relaxed">{CONTENT.services.trainingNote.desc}</p>
+              </div>
+            </div>
+            <button onClick={openWhatsApp} className="bg-[#FBC02D] text-[#0F172A] px-8 py-3 rounded-full font-black uppercase text-sm tracking-widest hover:scale-105 transition-all shadow-xl flex items-center gap-3 w-full lg:w-auto justify-center z-10">
+              <MessageCircle size={20} /> {CONTENT.services.trainingNote.btn}
+            </button>
+          </div>
+        </section>
+
+        <section id="boveda" className="bg-[#0F172A] text-white py-16 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16 text-center lg:text-left">
+            <div className="lg:w-1/2">
+              <span className="inline-block bg-[#FBC02D] text-[#0F172A] font-black px-6 py-1 rounded-full mb-8 uppercase text-[10px] tracking-widest font-bold">{CONTENT.vault.badge}</span>
+              <h2 className="text-2xl md:text-5xl font-black mb-8 leading-tight uppercase tracking-tighter">{CONTENT.vault.title}</h2>
+              <p className="text-xl text-[#FBC02D] font-black italic mb-6 leading-relaxed">"{CONTENT.vault.quote.replace(/"/g, '')}"</p>
+              <p className="text-base md:text-lg text-slate-300 mb-10 leading-relaxed font-medium">{CONTENT.vault.desc}</p>
+              <div className="grid sm:grid-cols-2 gap-10">
+                {CONTENT.vault.features.map((f, i) => (
+                  <div key={i} className="flex flex-col gap-4 items-center lg:items-start text-center lg:text-left">
+                    <div className="bg-white/5 p-4 rounded-2xl border border-white/10">{i === 0 ? <Lock className="text-[#FBC02D]" size={36} /> : <FileText className="text-[#FBC02D]" size={36} />}</div>
+                    <h4 className="font-black uppercase text-lg tracking-[0.2em]">{f.title}</h4>
+                    <p className="text-slate-400 text-sm md:text-base font-medium leading-tight">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:w-1/2 w-full max-w-xl mx-auto">
+              <div className="bg-slate-900/80 p-10 rounded-[3.5rem] border border-white/10 shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center justify-between mb-10 border-b border-white/10 pb-6 uppercase font-black text-[10px] text-slate-500 tracking-[0.3em]">
+                  <span className="flex gap-3"><div className="w-4 h-4 rounded-full bg-red-500 shadow-md shadow-red-500/20" /><div className="w-4 h-4 rounded-full bg-yellow-500 shadow-md shadow-yellow-500/20" /><div className="w-4 h-4 rounded-full bg-green-500 shadow-md shadow-green-500/20" /></span>
+                  <span>Evidencia Digital</span>
+                </div>
+                <div className="space-y-5 mb-10">
+                  <div className="bg-white/5 p-5 rounded-[2rem] flex items-center gap-6 border border-white/5 group hover:bg-white/10 transition-all cursor-pointer font-bold text-lg"><div className="w-12 h-12 bg-[#FBC02D] rounded-2xl flex items-center justify-center text-[#0F172A] uppercase text-sm font-black">PDF</div><span>Reporte_Mo_2024.pdf</span><span className="ml-auto text-[10px] text-green-400 border border-green-400/30 px-4 py-1.5 uppercase rounded-full font-black tracking-widest shadow-[0_0_15px_rgba(34,197,94,0.2)]">Verified</span></div>
+                  <div className="bg-white/5 p-5 rounded-[2rem] flex items-center gap-6 border border-white/5 group hover:bg-white/10 transition-all cursor-pointer font-bold text-lg opacity-80"><div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center text-white uppercase text-sm font-black">IMG</div><span>Site_Roofing.jpg</span><span className="ml-auto text-[10px] text-green-400 border border-green-400/30 px-4 py-1.5 uppercase rounded-full font-black tracking-widest">Verified</span></div>
+                </div>
+                <a href={CONTENT.exampleDriveUrl} target="_blank" className="w-full bg-[#FBC02D] text-[#0F172A] py-4 rounded-full font-black uppercase text-lg tracking-[0.2em] transition-all hover:scale-105 flex justify-center items-center gap-3 shadow-xl group font-bold">
+                  {CONTENT.vault.btn} <ArrowUpRight size={24} className="group-hover:rotate-45 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" className="py-20 bg-[#F8FAFC]">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#FBC02D] rounded-[4rem] p-12 md:p-16 text-center shadow-2xl border-[8px] border-[#0F172A] relative overflow-hidden group">
+              <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-8 uppercase tracking-tighter leading-none relative z-10">{CONTENT.cta.title}</h2>
+              <p className="text-[#0F172A] text-xl font-black mb-12 max-w-2xl mx-auto leading-relaxed relative z-10 uppercase opacity-90 tracking-wide">{CONTENT.cta.slogan}</p>
+              <div className="flex flex-col items-center gap-10 relative z-10">
+                <button onClick={openWhatsApp} className="bg-[#0F172A] text-white px-10 py-3.5 rounded-full font-black text-2xl hover:scale-105 transition-all uppercase shadow-2xl flex items-center gap-6 tracking-widest w-full md:w-auto justify-center font-bold">
+                  {CONTENT.cta.btn} <MessageCircle size={36} />
+                </button>
+                <div className="flex flex-wrap justify-center gap-12 text-[#0F172A] font-black uppercase text-sm tracking-[0.3em] border-t-2 border-[#0F172A]/10 pt-10 w-full font-bold">
+                  <button onClick={openWhatsApp} className="flex items-center gap-3 hover:scale-110 transition-transform font-black"><Phone size={28}/> {CONTENT.contact.phoneDisplay}</button>
+                  <a href={`mailto:${CONTENT.contact.email}`} className="flex items-center gap-3 hover:scale-110 transition-transform font-black"><Mail size={28}/> {CONTENT.contact.email}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="bg-[#0F172A] text-white pt-24 pb-12 text-center lg:text-left relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-20 mb-20">
+            <div className="col-span-2">
+              <div className="flex items-center justify-center lg:justify-start gap-4 mb-10 cursor-pointer group" onClick={scrollToTop}>
+                <img src={CONTENT.logoUrl} alt="Logo" className="h-16 w-auto group-hover:scale-110 transition-transform duration-500" />
+                <div className="flex flex-col leading-none text-left">
+                  <span className="text-3xl font-black uppercase tracking-tighter leading-none text-white">SAFETYPRO</span>
+                  <span className="text-3xl font-black uppercase tracking-tighter leading-none text-[#FBC02D]">MASTER</span>
+                </div>
+              </div>
+              <p className="text-slate-400 max-w-sm font-bold text-[12px] leading-relaxed mb-10 uppercase tracking-[0.3em] mx-auto lg:mx-0 font-medium">{CONTENT.contact.about}</p>
+              
+              <div className="flex justify-center lg:justify-start gap-6">
+                {CONTENT.socialLinks.map((social, i) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="bg-white/5 p-5 rounded-full hover:bg-[#FBC02D] hover:text-[#0F172A] transition-all border border-white/10 hover:scale-125 shadow-xl flex items-center justify-center">
+                      <IconComponent size={24} />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+            <div>
+              <h4 className="font-black uppercase mb-10 text-[#FBC02D] text-sm tracking-[0.4em] font-bold">NAVEGACIÓN</h4>
+              <ul className="space-y-6 text-[12px] font-black uppercase tracking-[0.3em] text-slate-400">
+                <li><button onClick={scrollToTop} className="hover:text-white transition-colors uppercase font-black tracking-widest">INICIO</button></li>
+                <li><a href="#servicios" className="hover:text-white transition-colors uppercase font-black tracking-widest">SERVICIOS</a></li>
+                <li><a href="#boveda" className="hover:text-white transition-colors uppercase font-black tracking-widest">LA BÓVEDA</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-black uppercase mb-10 text-[#FBC02D] text-sm tracking-[0.4em] font-bold">NORMATIVA</h4>
+              <ul className="space-y-6 text-[12px] font-black uppercase tracking-[0.3em] text-slate-400">
+                <li><button onClick={() => setActiveModal('osha')} className="hover:text-white underline decoration-[#FBC02D] decoration-[6px] underline-offset-8 font-black uppercase tracking-widest">OSHA CFR 1926</button></li>
+                <li><button onClick={() => setActiveModal('privacidad')} className="hover:text-white uppercase tracking-widest font-black">PRIVACIDAD</button></li>
+                <li><button onClick={() => setActiveModal('terminos')} className="hover:text-white uppercase tracking-widest font-black">TÉRMINOS</button></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-10 text-[10px] font-black text-slate-600 uppercase tracking-[0.5em] text-center">
+            <p>© 2025 {CONTENT.brandName.toUpperCase()}. ALL RIGHTS RESERVED.</p>
+            <p className="flex items-center gap-4 italic font-black"> <ShieldCheck size={20} className="text-slate-800" /> Missouri & Illinois Compliance Group</p>
+          </div>
+        </div>
+      </footer>
+
+      {/* 3. SISTEMA DE MODAL GLOBAL - Z-INDEX 100000 PARA QUE SEA LA CAPA SUPREMA REAL */}
+      {activeModal && (
+        <div className="fixed inset-0" style={{ zIndex: 100000 }}>
+          <div className="absolute inset-0 bg-[#0F172A]/98 backdrop-blur-xl animate-in fade-in duration-300" onClick={() => setActiveModal(null)} />
+          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div className="bg-white rounded-[3rem] max-w-lg w-full overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.9)] border-t-[14px] border-[#FBC02D] animate-in zoom-in-95 duration-300 pointer-events-auto">
+              <div className="p-10 md:p-14">
+                <div className="flex justify-between items-center mb-8">
+                  <h3 className="text-3xl font-black uppercase text-[#0F172A] tracking-tighter leading-none">
+                    {CONTENT.legalModals[activeModal].title}
+                  </h3>
+                  <button onClick={() => setActiveModal(null)} className="p-3 bg-slate-100 hover:bg-slate-200 text-[#0F172A] rounded-full transition-all"><X size={28} /></button>
+                </div>
+                <div className="prose prose-slate">
+                  <p className="text-slate-600 leading-relaxed font-bold text-xl md:text-2xl">{CONTENT.legalModals[activeModal].content}</p>
+                </div>
+                <div className="mt-12 flex justify-end">
+                  <button onClick={() => setActiveModal(null)} className="bg-[#0F172A] text-white px-10 py-3 rounded-full font-black uppercase text-xs tracking-[0.2em] shadow-2xl hover:scale-105 transition-all">CERRAR</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
